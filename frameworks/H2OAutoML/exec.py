@@ -53,6 +53,8 @@ def run(dataset, config):
 
     try:
         training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
+        #Early stopping
+        training_params['stopping_rounds'] = 3 # same number to use in FEDOT
         nthreads = config.framework_params.get('_nthreads', config.cores)
         # jvm_memory = str(round(config.max_mem_size_mb * 2/3))+"M"   # leaving 1/3rd of available memory for XGBoost
         jvm_memory = "21811M"   # leaving 1/3rd of available memory for XGBoost

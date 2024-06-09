@@ -41,6 +41,8 @@ def run(dataset, config):
 
     training_params = {k: v for k, v in config.framework_params.items()
                        if not k.startswith('_')}
+    #Early stopping
+    training_params['early_stop'] = True
 
     log_dir = output_subdir("logs", config)
     flaml_log_file_name = os.path.join(log_dir, "flaml.log")
@@ -50,7 +52,8 @@ def run(dataset, config):
                 task=config.type,
                 n_jobs=n_jobs,
                 log_file_name= flaml_log_file_name,
-                time_budget=time_budget, **training_params)
+                time_budget=time_budget, 
+                **training_params)
     log.info(f"Finished fit in {training.duration}s.")
 
     def infer(data: Union[str, pd.DataFrame]):

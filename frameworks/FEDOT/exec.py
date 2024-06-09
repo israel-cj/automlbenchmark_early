@@ -2,7 +2,8 @@ import logging
 import os
 from pathlib import Path
 
-from fedot.api.main import Fedot
+# from fedot.api.main import Fedot
+from fedot import FedotBuilder
 
 from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer
@@ -23,9 +24,16 @@ def run(dataset, config):
     log.info(f"Running FEDOT with a maximum time of {config.max_runtime_seconds}s on {n_jobs} cores, \
              optimizing {scoring_metric}")
     runtime_min = config.max_runtime_seconds / 60
-
-    fedot = Fedot(problem=config.type, timeout=runtime_min, metric=scoring_metric, seed=config.seed,
-                  max_pipeline_fit_time=runtime_min / 10, early_stopping_iterations=5,  **training_params)
+    #Early stopping 
+    fedot = (FedotBuilder(problem=config.type)
+             .setup_composition(timeout=runtime_min, preset='best_quality',  seed=config.seed)
+             .setup_evolution(early_stopping_iterations=3)
+             .setup_pipeline_evaluation(max_pipeline_fit_time=runtime_min / 10, metric=scoring_metric)
+             .build())
+    
+    
+    # fedot = Fedot(problem=config.type, timeout=runtime_min, metric=scoring_metric, seed=config.seed,
+    #               max_pipeline_fit_time=runtime_min / 10,  **training_params)
 
     with Timer() as training:
         fedot.fit(features=dataset.train.X, target=dataset.train.y)
