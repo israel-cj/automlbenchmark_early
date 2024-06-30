@@ -92,6 +92,8 @@ flaml:
     and hyperparameters for each learner. It is fast and cheap.
   project: https://github.com/microsoft/FLAML
   refs: [https://arxiv.org/pdf/1911.04706.pdf]
+  params:
+    early_stop: true
 
 GAMA:
   version: 'stable'
@@ -108,6 +110,8 @@ H2OAutoML:
     which automates the process of training a large selection of candidate models and stacked ensembles within a singlefunction.
   project: http://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html
   refs: [https://www.automl.org/wp-content/uploads/2020/07/AutoML_2020_paper_61.pdf]
+  params:
+    stopping_rounds: 3 # Default
 
 hyperoptsklearn:
   version: 'latest'
@@ -197,6 +201,8 @@ TPOT:
   refs:
     - https://academic.oup.com/bioinformatics/article/36/1/250/5511404
     - http://doi.acm.org/10.1145/2908812.2908918
+  params:
+    early_stop: 3 # using 3 as the default value in H2O automl
 #  params:
 #    _save_artifacts: ['models']
 #    max_eval_time_mins: 2

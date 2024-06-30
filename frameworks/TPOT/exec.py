@@ -49,7 +49,7 @@ def run(dataset, config):
 
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
     # Early stopping
-    training_params['early_stop'] = 3
+    # training_params['early_stop'] = 3
     n_jobs = config.framework_params.get('_n_jobs', config.cores)  # useful to disable multicore, regardless of the dataset config
     config_dict = config.framework_params.get('_config_dict', "TPOT sparse" if is_sparse(X_train) else None)
 

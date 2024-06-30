@@ -27,7 +27,7 @@ def run(dataset, config):
     #Early stopping 
     fedot = (FedotBuilder(problem=config.type)
              .setup_composition(timeout=runtime_min, preset='best_quality',  seed=config.seed)
-             .setup_evolution(early_stopping_iterations=3)
+             .setup_evolution(early_stopping_iterations=3) # using 3 as the default value in H2O automl
              .setup_pipeline_evaluation(max_pipeline_fit_time=runtime_min / 10, metric=scoring_metric)
              .build())
     

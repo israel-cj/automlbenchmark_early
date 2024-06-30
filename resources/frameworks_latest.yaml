@@ -39,12 +39,16 @@ AutoWEKA:
 
 flaml:
   version: 'latest'
+  params:
+    early_stop: true
 
 GAMA:
   version: 'latest'
 
 H2OAutoML:
   version: 'latest'
+  params:
+    stopping_rounds: 3 # Default
 
 hyperoptsklearn:
   version: 'latest'
@@ -88,6 +92,8 @@ oboe:
 
 TPOT:
   version: 'latest'
+  params:
+    early_stop: 3 # using 3 as the default value in H2O automl
 
 FEDOT:
   version: 'latest'
