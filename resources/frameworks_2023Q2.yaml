@@ -75,7 +75,7 @@ H2OAutoML:
   version: 'stable'
   params:
     _save_artifacts: ['leaderboard', 'logs']
-    stopping_rounds: 3 # Default
+    stopping_rounds: 0 # Default?
 
 lightautoml:
   version: '0.3.7.3'
