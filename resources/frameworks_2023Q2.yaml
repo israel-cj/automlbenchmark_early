@@ -6,7 +6,7 @@
 
 AutoGluon:
   abstract: true
-  version: "0.8.0"
+  version: "callbacks"
 
 AutoGluon_benchmark:
   extends: AutoGluon
@@ -47,8 +47,20 @@ autosklearn2:
 AutoWEKA:
   version: '2.6'
 
+FEDOT:
+  version: 'master'
+  description: |
+    FEDOT is a AutoML tool that optimizes composite machine learning pipelines using evolutionary optimisation.
+  project: https://github.com/aimclub/FEDOT
+  refs:
+    - https://doi.org/10.1016/j.future.2021.08.022
+#  params:
+#    _save_artifacts: ['leaderboard', 'models', 'info']
+
 flaml:
-  version: '1.2.4'
+  version: 'latest'
+  params:
+    early_stop: true
 
 GAMA:
   abstract: true
@@ -60,9 +72,10 @@ GAMA_benchmark:
     preset: performance
 
 H2OAutoML:
-  version: '3.40.0.4'
+  version: 'stable'
   params:
     _save_artifacts: ['leaderboard', 'logs']
+    stopping_rounds: 3 # Default
 
 lightautoml:
   version: '0.3.7.3'
@@ -100,9 +113,10 @@ NaiveAutoML:
   version: '0.0.27'
 
 TPOT:
-  version: '0.12.0'
+  version: 'stable'
   params:
     _save_artifacts: ['models']
+    early_stop: 3 
 
 
 #######################################

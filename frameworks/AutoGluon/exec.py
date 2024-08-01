@@ -19,6 +19,8 @@ from autogluon.tabular import TabularPredictor, TabularDataset
 from autogluon.core.utils.savers import save_pd, save_pkl
 import autogluon.core.metrics as metrics
 from autogluon.tabular.version import __version__
+# from autogluon.core.callbacks import EarlyStoppingCallback
+from autogluon.core.callbacks import EarlyStoppingEnsembleCallback
 
 from frameworks.shared.callee import call_run, result, output_subdir, \
     measure_inference_times
@@ -69,6 +71,9 @@ def run(dataset, config):
     problem_type = dataset.problem_type
 
     models_dir = tempfile.mkdtemp() + os.sep  # passed to AG
+    # Early stopping callback
+    # callbacks = [EarlyStoppingCallback(patience=3, verbose=True)]
+    callbacks = [EarlyStoppingEnsembleCallback(patience=5)]
 
     with Timer() as training:
         predictor = TabularPredictor(
@@ -79,6 +84,7 @@ def run(dataset, config):
         ).fit(
             train_data=train_path,
             time_limit=time_limit,
+            callbacks=callbacks,
             **training_params
         )
 
