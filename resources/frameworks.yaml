@@ -111,7 +111,7 @@ H2OAutoML:
   project: http://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html
   refs: [https://www.automl.org/wp-content/uploads/2020/07/AutoML_2020_paper_61.pdf]
   params:
-    stopping_rounds: 3 # Default
+    stopping_rounds: 0 # Default
 
 hyperoptsklearn:
   version: 'latest'
