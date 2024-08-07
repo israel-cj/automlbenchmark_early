@@ -28,8 +28,13 @@ def run_fedot_tabular(dataset: Dataset, config: TaskConfig):
         )
     )
 
-    return run_in_venv(__file__, "exec.py",
-                       input_data=data, dataset=dataset, config=config)
+    if config.measure_inference_time:
+        data["inference_subsample_files"] = dataset.inference_subsample_files(fmt="parquet")
+    options = dict(
+        serialization=dict(sparse_dataframe_deserialized_format='dense')
+    )
+
+    return run_in_venv(__file__, "exec.py", input_data=data, dataset=dataset, config=config, options=options)
 
 
 def run_fedot_timeseries(dataset: Dataset, config: TaskConfig):
