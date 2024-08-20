@@ -31,7 +31,16 @@ AutoGluon_hq_il001:
     _save_artifacts: ['leaderboard', 'info']
     presets: ['high_quality', 'optimize_for_deployment']
     _leaderboard_test: True
-    infer_limit: 0.01
+    infer_limit: 0.0001
+
+AutoGluon_fi_ft:
+  extends: AutoGluon
+  description: "AutoGluon for decent accuracy, fast inference, and extremely fast training."  
+  params:
+    _save_artifacts: ['leaderboard', 'info']
+    presets: 'medium_quality'
+    _leaderboard_test: True
+    infer_limit: 0.0001
 
 autosklearn:
   version: '0.15.0'
